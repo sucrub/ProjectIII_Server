@@ -19,4 +19,13 @@ const addServerAdmin = async (email) => {
   return serverAdmin;
 };
 
-module.exports = { addServerAdmin };
+const deleteServerAdmin = async (adminId) => {
+  await memberDao.deleteMember(adminId);
+};
+
+const getAllAdmins = async (conditions) => {
+  const roles = await memberDao.getAllAdmins(conditions);
+  return roles;
+};
+
+module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins };

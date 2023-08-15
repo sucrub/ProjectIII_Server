@@ -6,4 +6,21 @@ const addServerAdmin = async (req, res) => {
   return res.send({ status: 1, result: { serverAdmin } });
 };
 
-module.exports = { addServerAdmin };
+const deleteServerAdmin = async (req, res) => {
+  const { adminId } = req.params;
+  await adminService.deleteServerAdmin(adminId);
+  return res.send({ status: 1 });
+};
+
+const getAllAdmins = async (req, res) => {
+  let { offset, limit } = req.query;
+  offset = parseInt(offset, 10);
+  limit = parseInt(limit, 10);
+  const admins = await adminService.getAllAdmins({
+    offset,
+    limit,
+  });
+  return res.send({ status: 1, result: { admins } });
+};
+
+module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins };

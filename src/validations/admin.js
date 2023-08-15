@@ -6,6 +6,14 @@ const addServerAdmin = {
   }),
 };
 
+const getAdmins = {
+  query: Joi.object({
+    offset: Joi.number(),
+    limit: Joi.number(),
+  }),
+};
+
 module.exports = {
   addServerAdminValidate: validate(addServerAdmin, { keyByField: true }),
+  getAdminsValidate: validate(getAdmins, { keyByField: true }),
 };
