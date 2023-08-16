@@ -20,4 +20,10 @@ router.get(
   asyncMiddleware(campaignController.getCampaign)
 );
 
+router.post(
+  "/campaign/add-user",
+  auth,
+  asyncMiddleware(campaignController.addMember)
+);
+
 module.exports = router;
