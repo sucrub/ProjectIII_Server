@@ -43,9 +43,38 @@ const getAllAdmins = async (conditions) => {
   return adminsWithUserDetails;
 };
 
+const addMember = async (userId, campaignId, roleId) => {
+  const member = await Member.create({
+    campaignId,
+    userId,
+    roleId,
+  });
+  return member;
+};
+
+const getRoleId = async (userId, campaignId) => {
+  const campaign = await Member.findOne({
+    userId,
+    campaignId,
+  });
+  return campaign.roleId;
+};
+
+const findExistMember = async (userId, campaignId) => {
+  const member = await Member.findOne({
+    userId,
+    campaignId,
+  });
+  if (member === null) return false;
+  return true;
+};
+
 module.exports = {
   createMember,
   findMember,
   deleteMember,
   getAllAdmins,
+  addMember,
+  getRoleId,
+  findExistMember,
 };

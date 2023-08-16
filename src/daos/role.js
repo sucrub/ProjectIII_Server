@@ -33,10 +33,25 @@ const setPermissionsOfRole = async (roleId, permissions) => {
   return roles;
 };
 
+const getRoleIdByName = async (name) => {
+  const id = await Role.findOne({
+    name,
+  });
+  return id._id;
+};
+
+const checkRole = async (id) => {
+  const role = await Role.findById(id);
+  return role._doc.name;
+};
+
 module.exports = {
   getRoleId,
   createRole,
   getAllRoles,
   deleteRole,
   setPermissionsOfRole,
+  checkRole,
+  getRoleId,
+  getRoleIdByName,
 };

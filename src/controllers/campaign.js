@@ -13,7 +13,15 @@ const getCampaign = async (req, res) => {
   return res.send({ status: 1, result: { campaign } });
 };
 
+const addMember = async (req, res) => {
+  const data = req.body;
+  const ownerId = req.userId;
+  const member = await campaignService.addMember(ownerId, data);
+  return res.send({ status: 1, result: { member } });
+};
+
 module.exports = {
   createCampaign,
   getCampaign,
+  addMember,
 };
