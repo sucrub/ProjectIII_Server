@@ -33,9 +33,15 @@ const updatePermission = async (req, res) => {
   return res.send({ status: 1, result: { permission } });
 };
 
+const getAllPermissionNoLimit = async (req, res) => {
+  const permissions = await permissionService.getAllPermissionNoLimit();
+  return res.send({ status: 1, result: { permissions } });
+};
+
 module.exports = {
   createPermission,
   deletePermission,
   getAllPermission,
   updatePermission,
+  getAllPermissionNoLimit,
 };

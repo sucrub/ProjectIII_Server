@@ -28,9 +28,15 @@ const updatePermission = async (permissionId, data) => {
   return permission;
 };
 
+const getAllPermissionNoLimit = async () => {
+  const permissions = await permissionDao.getAllPermissionNoLimit();
+  return permissions;
+};
+
 module.exports = {
   createPermission,
   deletePermission,
   getAllPermission,
   updatePermission,
+  getAllPermissionNoLimit,
 };

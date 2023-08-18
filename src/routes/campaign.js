@@ -26,4 +26,34 @@ router.post(
   asyncMiddleware(campaignController.addMember)
 );
 
+router.delete(
+  "/campaign/delete-member",
+  auth,
+  asyncMiddleware(campaignController.deleteMember)
+);
+
+router.get(
+  "/campaign/get-all-member/:campaignId",
+  auth,
+  asyncMiddleware(campaignController.getAllMember)
+);
+
+router.post(
+  "/campaign/change-member-role",
+  auth,
+  asyncMiddleware(campaignController.changeMemberRole)
+);
+
+router.get(
+  "/campaign/get-my-campaigns",
+  auth,
+  asyncMiddleware(campaignController.getMyCampaign)
+);
+
+router.put(
+  "/campaign/update-campaign/:campaignId",
+  auth,
+  asyncMiddleware(campaignController.updateCampaign)
+);
+
 module.exports = router;

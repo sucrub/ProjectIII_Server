@@ -30,10 +30,16 @@ const updatePermission = async (permissionId, createFields) => {
   return permission;
 };
 
+const getAllPermissionNoLimit = async () => {
+  const permissions = await Permission.find();
+  return permissions;
+};
+
 module.exports = {
   createPermission,
   getPermission,
   deletePermission,
   getAllPermission,
   updatePermission,
+  getAllPermissionNoLimit,
 };
