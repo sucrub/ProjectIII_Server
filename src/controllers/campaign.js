@@ -20,8 +20,48 @@ const addMember = async (req, res) => {
   return res.send({ status: 1, result: { member } });
 };
 
+const deleteMember = async (req, res) => {
+  const data = req.body;
+  await campaignService.deleteMember(data);
+  return res.send({ status: 1 });
+};
+
+const getAllMember = async (req, res) => {
+  const { campaignId } = req.params;
+  const members = await campaignService.getAllMember(campaignId);
+  return res.send({ status: 1, result: { members } });
+};
+
+const changeMemberRole = async (req, res) => {
+  const { userId, campaignId, role } = req.body;
+  const member = await campaignService.changeMemberRole(
+    userId,
+    campaignId,
+    role
+  );
+  return res.send({ status: 1, result: { member } });
+};
+
+const getMyCampaign = async (req, res) => {
+  const userId = req.userId;
+  const campaigns = await campaignService.getMyCampaign(userId);
+  return res.send({ status: 1, result: { campaigns } });
+};
+
+const updateCampaign = async (req, res) => {
+  const { campaignId } = req.params;
+  const data = req.body;
+  const campaign = await campaignService.updateCampaign(campaignId, data);
+  return res.send({ status: 1, result: { campaign } });
+};
+
 module.exports = {
   createCampaign,
   getCampaign,
   addMember,
+  deleteMember,
+  getAllMember,
+  changeMemberRole,
+  getMyCampaign,
+  updateCampaign,
 };

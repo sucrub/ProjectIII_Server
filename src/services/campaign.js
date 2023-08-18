@@ -51,8 +51,53 @@ const addMember = async (ownerId, { campaignId, email, role }) => {
   throw new CustomError(errorCodes.UNAUTHORIZED);
 };
 
+const deleteMember = async (data) => {
+  await memberDao.deleteMemberFromCampaign(data);
+};
+
+const getAllMember = async (campaignId) => {
+  const members = await memberDao.getAllMember(campaignId);
+  const memberList = [];
+  await Promise.all(
+    members.map(async (member) => {
+      const user = await userDao.findUser(member.userId);
+      const role = await roleDao.checkRole(member.roleId);
+      user._doc.role = role;
+      memberList.push(user);
+    })
+  );
+  return memberList;
+};
+
+const changeMemberRole = async (userId, campaignId, role) => {
+  const member = memberDao.changeMemberRole(userId, campaignId, role);
+  return member;
+};
+
+const getMyCampaign = async (userId) => {
+  const campaigns = await memberDao.userFindCampaign(userId);
+  const listCampaigns = await campaignDao.getMyCampaigns(campaigns);
+
+  // Remove null values from the listCampaigns array
+  const filteredCampaigns = listCampaigns.filter(
+    (campaign) => campaign !== null
+  );
+
+  return filteredCampaigns;
+};
+
+const updateCampaign = async (campaignId, data) => {
+  const campaign = await campaignDao.updateCampaign(campaignId, data);
+  return campaign;
+};
+
 module.exports = {
   createCampaign,
   getCampaign,
   addMember,
+  deleteMember,
+  getAllMember,
+  changeMemberRole,
+  getMyCampaign,
+  updateCampaign,
 };

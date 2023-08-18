@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongoose").Types;
 const Member = require("../models/member");
 const User = require("../models/user");
+const roleDao = require("./role");
 const { find } = require("./utils/find");
 
 const createMember = async (createFields) => {
@@ -69,6 +70,34 @@ const findExistMember = async (userId, campaignId) => {
   return true;
 };
 
+const deleteMemberFromCampaign = async (data) => {
+  await Member.deleteOne(data);
+};
+
+const getAllMember = async (campaignId) => {
+  const members = await Member.find({
+    campaignId,
+  });
+  return members;
+};
+
+const changeMemberRole = async (userId, campaignId, role) => {
+  const roleId = await roleDao.getRoleIdByName(role);
+  const member = await Member.findOneAndUpdate(
+    { userId: userId, campaignId: campaignId },
+    { $set: { roleId: roleId } },
+    { new: true }
+  );
+  return member;
+};
+
+const userFindCampaign = async (userId) => {
+  const campaigns = await Member.find({
+    userId,
+  });
+  return campaigns;
+};
+
 module.exports = {
   createMember,
   findMember,
@@ -77,4 +106,8 @@ module.exports = {
   addMember,
   getRoleId,
   findExistMember,
+  deleteMemberFromCampaign,
+  getAllMember,
+  changeMemberRole,
+  userFindCampaign,
 };

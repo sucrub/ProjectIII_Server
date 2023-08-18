@@ -37,4 +37,10 @@ router.put(
   asyncMiddleware(permissionController.updatePermission)
 );
 
+router.get(
+  "/permission/get-permissions",
+  auth,
+  asyncMiddleware(permissionController.getAllPermissionNoLimit)
+);
+
 module.exports = router;
