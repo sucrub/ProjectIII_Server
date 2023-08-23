@@ -20,7 +20,7 @@ const addServerAdmin = async (email) => {
 };
 
 const deleteServerAdmin = async (adminId) => {
-  await memberDao.deleteMember(adminId);
+  await memberDao.deleteAdmin(adminId);
 };
 
 const getAllAdmins = async (conditions) => {
