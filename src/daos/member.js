@@ -28,20 +28,20 @@ const getAllAdmins = async (conditions) => {
   };
   const admins = await find(Member, searchCondition);
 
-  const adminsWithUserDetails = await Promise.all(
+  let adminsWithUserDetails = await Promise.all(
     admins.documents.map(async (admin) => {
       const user = await User.findOne(
         { _id: admin.userId },
-        { email: 1, firstName: 1, lastName: 1 }
+        { email: 1 }
       ).lean();
-      return {
-        ...admin,
-        user,
-      };
+      return user;
     })
   );
 
-  return adminsWithUserDetails;
+  return {
+    data: adminsWithUserDetails,
+    total: admins.total,
+  };
 };
 
 const addMember = async (userId, campaignId, roleId) => {
@@ -98,6 +98,13 @@ const userFindCampaign = async (userId) => {
   return campaigns;
 };
 
+const deleteAdmin = async (id) => {
+  await Member.findOneAndDelete({
+    userId: id,
+    roleId: "64afa9ba19b30cfea8600b26",
+  });
+};
+
 module.exports = {
   createMember,
   findMember,
@@ -110,4 +117,5 @@ module.exports = {
   getAllMember,
   changeMemberRole,
   userFindCampaign,
+  deleteAdmin,
 };
