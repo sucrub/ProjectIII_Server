@@ -76,6 +76,22 @@ const getTaskByCampaignId = async (campaignId) => {
   return updatedTasks;
 };
 
+const getTaskById = async (taskId) => {
+  const task = await Task.findById(taskId);
+  const userEmails = [];
+
+  for (const userId of task.member) {
+    const user = await User.findById(userId);
+    if (user) {
+      userEmails.push(user.email);
+    }
+  }
+
+  const result = task.toObject();
+  result.userEmails = userEmails;
+  return result;
+};
+
 const getMyTask = async (userId) => {
   const tasks = await Task.find({ member: userId });
   const updatedTasks = await Promise.all(
@@ -114,4 +130,5 @@ module.exports = {
   getMyTask,
   updateTask,
   deleteTask,
+  getTaskById,
 };

@@ -10,6 +10,12 @@ router.post(
 );
 
 router.get(
+  "/task/get-task-by-id/:taskId",
+  auth,
+  asyncMiddleware(taskController.getTaskById)
+);
+
+router.get(
   "/task/get-task-by-campaign-id/:campaignId",
   auth,
   asyncMiddleware(taskController.getTaskByCampaignId)

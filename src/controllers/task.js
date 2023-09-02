@@ -12,6 +12,12 @@ const getTaskByCampaignId = async (req, res) => {
   return res.send({ status: 1, result: { tasks } });
 };
 
+const getTaskById = async (req, res) => {
+  const { taskId } = req.params;
+  const task = await taskService.getTaskById(taskId);
+  return res.send({ status: 1, result: { task } });
+};
+
 const getMyTask = async (req, res) => {
   const userId = req.userId;
   const tasks = await taskService.getMyTask(userId);
@@ -37,4 +43,5 @@ module.exports = {
   getMyTask,
   updateTask,
   deleteTask,
+  getTaskById,
 };
