@@ -11,6 +11,10 @@ const getCampaignById = async (campaignId) => {
   return campaign;
 };
 
+const deleteCampaign = async (campaignId) => {
+  await Campaign.findByIdAndDelete(campaignId);
+};
+
 const getMyCampaigns = async (campaigns) => {
   const campaignIds = campaigns.map((campaign) => campaign.campaignId);
   const campaignPromises = campaignIds.map((id) => Campaign.findById(id));
@@ -29,4 +33,5 @@ module.exports = {
   getCampaignById,
   getMyCampaigns,
   updateCampaign,
+  deleteCampaign,
 };

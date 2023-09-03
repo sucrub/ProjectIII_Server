@@ -20,6 +20,12 @@ router.get(
   asyncMiddleware(campaignController.getCampaign)
 );
 
+router.delete(
+  "/campaign/delete-campaign/:campaignId",
+  auth,
+  asyncMiddleware(campaignController.deleteCampaign)
+);
+
 router.post(
   "/campaign/add-user",
   auth,

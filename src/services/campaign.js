@@ -26,6 +26,10 @@ const createCampaign = async ({ userId, data }) => {
   return campaign;
 };
 
+const deleteCampaign = async (campaignId) => {
+  await campaignDao.deleteCampaign(campaignId);
+};
+
 const getCampaign = async (campaignId) => {
   const campaign = await campaignDao.getCampaignById(campaignId);
   return campaign;
@@ -100,4 +104,5 @@ module.exports = {
   changeMemberRole,
   getMyCampaign,
   updateCampaign,
+  deleteCampaign,
 };

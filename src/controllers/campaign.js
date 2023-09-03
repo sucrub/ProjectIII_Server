@@ -13,6 +13,12 @@ const getCampaign = async (req, res) => {
   return res.send({ status: 1, result: { campaign } });
 };
 
+const deleteCampaign = async (req, res) => {
+  const { campaignId } = req.params;
+  await campaignService.deleteCampaign(campaignId);
+  return res.send({ status: 1 });
+};
+
 const addMember = async (req, res) => {
   const data = req.body;
   const ownerId = req.userId;
@@ -64,4 +70,5 @@ module.exports = {
   changeMemberRole,
   getMyCampaign,
   updateCampaign,
+  deleteCampaign,
 };
