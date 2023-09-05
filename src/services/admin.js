@@ -28,4 +28,9 @@ const getAllAdmins = async (conditions) => {
   return roles;
 };
 
-module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins };
+const isAdmin = async (userId) => {
+  const result = await memberDao.isAdmin(userId);
+  return result;
+};
+
+module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins, isAdmin };

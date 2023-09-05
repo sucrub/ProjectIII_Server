@@ -61,6 +61,13 @@ const updateCampaign = async (req, res) => {
   return res.send({ status: 1, result: { campaign } });
 };
 
+const isMember = async (req, res) => {
+  const { campaignId } = req.params;
+  const userId = req.userId;
+  const result = await campaignService.isMember(userId, campaignId);
+  return res.send(result);
+};
+
 module.exports = {
   createCampaign,
   getCampaign,
@@ -71,4 +78,5 @@ module.exports = {
   getMyCampaign,
   updateCampaign,
   deleteCampaign,
+  isMember,
 };

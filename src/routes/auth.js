@@ -38,5 +38,10 @@ router.post(
   resetPasswordValidate,
   asyncMiddleware(authController.resetPassword)
 );
+router.post(
+  "/auths/check-permission",
+  auth,
+  asyncMiddleware(authController.checkPermission)
+);
 
 module.exports = router;

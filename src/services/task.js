@@ -28,6 +28,11 @@ const deleteTask = async (taskId) => {
   await taskDao.deleteTask(taskId);
 };
 
+const isMember = async (userId, taskId) => {
+  const result = await taskDao.isMember(userId, taskId);
+  return result;
+};
+
 module.exports = {
   createTask,
   getTaskByCampaignId,
@@ -35,4 +40,5 @@ module.exports = {
   updateTask,
   deleteTask,
   getTaskById,
+  isMember,
 };

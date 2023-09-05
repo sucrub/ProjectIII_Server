@@ -44,6 +44,14 @@ const getAllAdmins = async (conditions) => {
   };
 };
 
+const isAdmin = async (userId) => {
+  const user = await Member.findOne({
+    userId,
+    roleId: "64afa9ba19b30cfea8600b26",
+  });
+  return user;
+};
+
 const addMember = async (userId, campaignId, roleId) => {
   const member = await Member.create({
     campaignId,
@@ -105,6 +113,23 @@ const deleteAdmin = async (id) => {
   });
 };
 
+const getRoleInCampaign = async (userId, campaignId) => {
+  const result = await Member.findOne({
+    userId,
+    campaignId,
+  });
+  return result.roleId;
+};
+
+const isMember = async (userId, campaignId) => {
+  const result = await Member.findOne({
+    userId,
+    campaignId,
+  });
+  if (result) return "Yes";
+  else return "No";
+};
+
 module.exports = {
   createMember,
   findMember,
@@ -118,4 +143,7 @@ module.exports = {
   changeMemberRole,
   userFindCampaign,
   deleteAdmin,
+  isAdmin,
+  getRoleInCampaign,
+  isMember,
 };

@@ -23,4 +23,10 @@ const getAllAdmins = async (req, res) => {
   return res.send({ status: 1, result: { admins } });
 };
 
-module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins };
+const isAdmin = async (req, res) => {
+  const userId = req.userId;
+  const result = await adminService.isAdmin(userId);
+  return res.send({ status: 1, result: { result } });
+};
+
+module.exports = { addServerAdmin, deleteServerAdmin, getAllAdmins, isAdmin };

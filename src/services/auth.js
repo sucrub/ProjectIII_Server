@@ -4,6 +4,9 @@ const CustomError = require("../errors/CustomError");
 const errorCodes = require("../errors/code");
 
 const userDao = require("../daos/user");
+const memberDao = require("../daos/member");
+const permissionDao = require("../daos/permission");
+const roleDao = require("../daos/role");
 
 const fs = require("fs").promises;
 
@@ -123,6 +126,13 @@ const resetPassword = async (token, password) => {
   }
 };
 
+const checkPermission = async (userId, campaignId, permissionName) => {
+  const roleId = await memberDao.getRoleInCampaign(userId, campaignId);
+  const permissionId = await permissionDao.getPermissionId(permissionName);
+  const result = await roleDao.checkHavePermisson(roleId, permissionId);
+  return result;
+};
+
 module.exports = {
   login,
   register,
@@ -130,4 +140,5 @@ module.exports = {
   refreshToken,
   forgotPassword,
   resetPassword,
+  checkPermission,
 };

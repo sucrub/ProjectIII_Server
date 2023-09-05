@@ -124,6 +124,13 @@ const deleteTask = async (taskId) => {
   await Task.findByIdAndDelete(taskId);
 };
 
+const isMember = async (userId, taskId) => {
+  const task = await Task.findById(taskId);
+  const hasmember = task.member.some((perm) => perm.equals(userId));
+  if (hasmember) return "Yes";
+  else return "No";
+};
+
 module.exports = {
   createTask,
   getTaskByCampaignId,
@@ -131,4 +138,5 @@ module.exports = {
   updateTask,
   deleteTask,
   getTaskById,
+  isMember,
 };

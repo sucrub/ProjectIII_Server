@@ -62,4 +62,10 @@ router.put(
   asyncMiddleware(campaignController.updateCampaign)
 );
 
+router.get(
+  "/campaign/is-member/:campaignId",
+  auth,
+  asyncMiddleware(campaignController.isMember)
+);
+
 module.exports = router;

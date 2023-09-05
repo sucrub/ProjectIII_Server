@@ -39,4 +39,10 @@ router.delete(
   asyncMiddleware(taskController.deleteTask)
 );
 
+router.get(
+  "/task/is-member/:taskId",
+  auth,
+  asyncMiddleware(taskController.isMember)
+);
+
 module.exports = router;

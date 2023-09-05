@@ -27,4 +27,6 @@ router.delete(
   asyncMiddleware(adminController.deleteServerAdmin)
 );
 
+router.get("/admin/is-admin", auth, asyncMiddleware(adminController.isAdmin));
+
 module.exports = router;

@@ -95,6 +95,11 @@ const updateCampaign = async (campaignId, data) => {
   return campaign;
 };
 
+const isMember = async (userId, campaignId) => {
+  const result = await memberDao.isMember(userId, campaignId);
+  return result;
+};
+
 module.exports = {
   createCampaign,
   getCampaign,
@@ -105,4 +110,5 @@ module.exports = {
   getMyCampaign,
   updateCampaign,
   deleteCampaign,
+  isMember,
 };

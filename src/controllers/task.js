@@ -37,6 +37,13 @@ const deleteTask = async (req, res) => {
   return res.send({ status: 1 });
 };
 
+const isMember = async (req, res) => {
+  const { taskId } = req.params;
+  const userId = req.userId;
+  const result = await taskService.isMember(userId, taskId);
+  return res.send(result);
+};
+
 module.exports = {
   createTask,
   getTaskByCampaignId,
@@ -44,4 +51,5 @@ module.exports = {
   updateTask,
   deleteTask,
   getTaskById,
+  isMember,
 };

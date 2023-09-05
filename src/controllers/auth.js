@@ -40,6 +40,17 @@ const resetPassword = async (req, res) => {
   return res.send({ status: 1, result: { user } });
 };
 
+const checkPermission = async (req, res) => {
+  const userId = req.userId;
+  const { campaignId, permissionName } = req.body;
+  const result = await authService.checkPermission(
+    userId,
+    campaignId,
+    permissionName
+  );
+  return res.send(result);
+};
+
 module.exports = {
   register,
   login,
@@ -47,4 +58,5 @@ module.exports = {
   refreshToken,
   forgotPassword,
   resetPassword,
+  checkPermission,
 };

@@ -45,6 +45,15 @@ const checkRole = async (id) => {
   return role._doc.name;
 };
 
+const checkHavePermisson = async (roleId, permissionId) => {
+  const role = await Role.findById(roleId);
+  const hasPermission = role.permission.some((perm) =>
+    perm.equals(permissionId)
+  );
+  if (hasPermission) return "Yes";
+  else return "No";
+};
+
 module.exports = {
   getRoleId,
   createRole,
@@ -54,4 +63,5 @@ module.exports = {
   checkRole,
   getRoleId,
   getRoleIdByName,
+  checkHavePermisson,
 };

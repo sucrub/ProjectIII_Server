@@ -35,6 +35,13 @@ const getAllPermissionNoLimit = async () => {
   return permissions;
 };
 
+const getPermissionId = async (permissionName) => {
+  const permission = await Permission.findOne({
+    name: permissionName,
+  });
+  return permission.id;
+};
+
 module.exports = {
   createPermission,
   getPermission,
@@ -42,4 +49,5 @@ module.exports = {
   getAllPermission,
   updatePermission,
   getAllPermissionNoLimit,
+  getPermissionId,
 };
